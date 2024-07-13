@@ -38,6 +38,11 @@ def increasing_animation(input_string, delay_second=0.01):
             print()
             current_string = ""
             continue
+        if target_char == ' ':
+            current_string += target_char
+            sys.stdout.write('\r' + current_string)
+            sys.stdout.flush()
+            continue
 
         current_char = 'a'
         while current_char != target_char:
