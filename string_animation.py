@@ -2,6 +2,9 @@ import time
 import sys
 import os
 
+"""
+    simple_animation() simply prints letter after letter
+"""
 def simple_animation(input_string, delay_second=0.01):
     current_string = ""
     # get terminal width
@@ -21,6 +24,9 @@ def simple_animation(input_string, delay_second=0.01):
         time.sleep(delay_second)
     print()
 
+"""
+    increasing_animation() prints all the letters from the current letter from [a-zA-Z].
+"""
 def increasing_animation(input_string, delay_second=0.01):
     current_string = ""
     # get terminal width
