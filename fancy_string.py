@@ -95,8 +95,6 @@ def animation_bouncing_ball(input_string, delay_second=0.1, height=5):
     sys.stdout.flush()
     print()  # Move to the next line after finishing
 
-
-
 def animation_display_board(input_string, delay_second=0.1, repeat=3):
     width = len(input_string) + 5
     initial_padded_string = ' ' * width + input_string + ' ' * 5
@@ -132,9 +130,7 @@ colors = {
         "PINK": '\033[38;5;218m',
         "WHITE": '\033[97m',
         "GRAY": '\033[90m',
-        "BLACK": '\033[30m'
     }
-
 
 def color_simple(input_string, color):
     terminator = "\033[0m"
@@ -146,8 +142,7 @@ def color_simple(input_string, color):
     
     print(initiator + input_string + terminator)
 
-def color_alternating(input_string, max_time, delaysecond=0.1):
-    
+def color_alternating(input_string, max_time, delay_second=0.1):
     terminator = "\033[0m"
     start_time = time.time()
     
@@ -159,7 +154,36 @@ def color_alternating(input_string, max_time, delaysecond=0.1):
             to_print = initiator + input_string + terminator
             sys.stdout.write('\r' + to_print)
             sys.stdout.flush()
-            time.sleep(delaysecond)
-    sys.stdout.write('\r' + input_string)
-    sys.stdout.flush()
-    print()
+            time.sleep(delay_second)
+    print('\r' + input_string)
+
+def color_alternating_individual(input_string, max_time, delay_second=0.05):
+    terminator = "\033[0m"
+    start_time = time.time()
+    keys = list(colors.keys())
+    length = len(input_string)
+    
+    while (time.time() - start_time) < max_time:
+        to_print = ""
+        for i, char in enumerate(input_string):
+            color_key = keys[(i + int((time.time() - start_time) / delay_second)) % len(colors)]
+            to_print += colors[color_key] + char + terminator
+        sys.stdout.write('\r' + to_print)
+        sys.stdout.flush()
+        time.sleep(delay_second)
+    
+    print('\r' + input_string)
+
+
+def animation_blinking(input_string, max_time, delay_second=0.5):
+    start_time = time.time()
+    
+    while (time.time() - start_time) < max_time:
+        sys.stdout.write('\r' + input_string)
+        sys.stdout.flush()
+        time.sleep(delay_second)
+        sys.stdout.write('\r' + ' ' * len(input_string))
+        sys.stdout.flush()
+        time.sleep(delay_second)
+    
+    print('\r' + input_string)
